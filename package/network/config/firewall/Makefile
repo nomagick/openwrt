@@ -12,11 +12,11 @@ PKG_NAME:=firewall
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/project/firewall3.git
-PKG_SOURCE_DATE:=2018-08-13
-PKG_SOURCE_VERSION:=1c4d5bcd1137e61e91dca858fe33d76d7a1dc821
-PKG_MIRROR_HASH:=49f939877a734056455556c90b959c407fd2c4988dc5d86f62a8122ebd7b8899
-PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
+PKG_SOURCE_URL=https://github.com/nomagick/firewall3.git
+PKG_SOURCE_DATE:=2019-05-06
+PKG_SOURCE_VERSION:=802cd6e09a40625f305a52b346227036512138b0
+PKG_MIRROR_HASH:=97050f68e2b2bab8b3fd931b19937c40f09b7a364285279a6f71782e88bf2049
+PKG_MAINTAINER:=Yanlong Wang <yanlong.wang@naiver.org>
 PKG_LICENSE:=ISC
 
 PKG_CONFIG_DEPENDS := CONFIG_IPV6
@@ -28,7 +28,7 @@ define Package/firewall
   SECTION:=net
   CATEGORY:=Base system
   TITLE:=OpenWrt C Firewall
-  DEPENDS:=+libubox +libubus +libuci +libip4tc +IPV6:libip6tc +libxtables +kmod-ipt-core +kmod-ipt-conntrack +IPV6:kmod-nf-conntrack6 +kmod-ipt-nat
+  DEPENDS:=+libubox +libubus +libuci +libip4tc +IPV6:libip6tc +libxtables +kmod-ipt-core +kmod-ipt-conntrack +IPV6:kmod-nf-conntrack6 +kmod-ipt-nat +IPV6:kmod-ipt-nat6
 endef
 
 define Package/firewall/description
@@ -58,5 +58,14 @@ define Package/firewall/install
 	$(INSTALL_DIR) $(1)/usr/share/fw3
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/helpers.conf $(1)/usr/share/fw3
 endef
+
+# define Build/Prepare
+# 	$(call Build/Prepare/Default)
+# 	mkdir -p $(PKG_BUILD_DIR)
+# 	$(CP) ./src/* $(PKG_BUILD_DIR)/
+# endef
+
+
+# SOURCE_DIR:=src
 
 $(eval $(call BuildPackage,firewall))
