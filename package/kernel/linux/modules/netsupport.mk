@@ -783,6 +783,7 @@ define KernelPackage/tcp-bbr
   DEPENDS:=@!LINUX_3_18 @!LINUX_4_1 @!LINUX_4_4 +LINUX_4_9:kmod-sched
   KCONFIG:= \
 	CONFIG_TCP_CONG_ADVANCED=y \
+  CONFIG_NET_SCH_FQ=y \
 	CONFIG_TCP_CONG_BBR
   FILES:=$(LINUX_DIR)/net/ipv4/tcp_bbr.ko
   AUTOLOAD:=$(call AutoLoad,74,tcp_bbr)
