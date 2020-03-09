@@ -126,6 +126,16 @@ menu "Global build settings"
 		default y
 		help
 		  Enables IPv6 support in kernel (builtin) and packages.
+	
+	config NAT6
+		bool
+		prompt "Enable IPv6 NAT support (NAT6) in packages"
+		default n
+		depends on IPV6
+		select PACKAGE_kmod-ipt-nat6
+		help
+		  Enables IPv6 NAT support in kernel (builtin) and packages.
+
 
 	comment "Stripping options"
 

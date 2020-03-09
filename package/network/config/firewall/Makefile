@@ -12,11 +12,12 @@ PKG_NAME:=firewall
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/project/firewall3.git
-PKG_SOURCE_DATE:=2019-11-22
-PKG_SOURCE_VERSION:=8174814a507489ebbe8bb85c1004e1f02919ca82
-PKG_MIRROR_HASH:=84e0cca2d47470bdb1788a8ae044cc425be8ff650a1137474ba43a15040085da
-PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
+PKG_SOURCE_URL=https://github.com/nomagick/firewall3.git
+PKG_MIRROR_HASH:=f60f81acb23d2998101dce209703d98ccbd0ebe5dfa1be5c9fe5f347e12e6ea6
+PKG_SOURCE_DATE:=2020-03-13
+PKG_SOURCE_VERSION:=6fb40389cd1a86b81ab39174b3fba26057620cfe
+PKG_MAINTAINER:=Yanlong Wang <yanlong.wang@naiver.org>
+
 PKG_LICENSE:=ISC
 
 PKG_CONFIG_DEPENDS := CONFIG_IPV6
@@ -43,6 +44,7 @@ endef
 TARGET_CFLAGS += -ffunction-sections -fdata-sections -flto
 TARGET_LDFLAGS += -Wl,--gc-sections -flto
 CMAKE_OPTIONS += $(if $(CONFIG_IPV6),,-DDISABLE_IPV6=1)
+CMAKE_OPTIONS += $(if $(CONFIG_NAT6),-DENABLE_NAT6=1,)
 
 define Package/firewall/install
 	$(INSTALL_DIR) $(1)/sbin
